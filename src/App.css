@@ -1,0 +1,103 @@
+.App {
+  font-family: 'TX02Mono-Regular';
+}
+
+@font-face {
+  font-family: 'TX02Mono-Regular';
+  src: url('https://intdev-global.s3.us-west-2.amazonaws.com/public/internet-dev/e049dfb6-9c5d-4ac4-97c2-eb6e95c61d09.woff2') format('woff2');
+}
+
+header {
+  text-align: left;
+  margin-top: 25px;
+}
+
+header h1 {
+  margin-left: 50px;
+}
+
+main {
+  position: absolute;
+  top: 40%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px; /* Optional: set a maximum width */
+  box-sizing: border-box; /* Ensure padding and border do not affect width */
+}
+
+main h1 {
+  font-size: 40px;
+}
+
+main h2 {
+  font-size: 40px;
+}
+
+main h3 {
+  font-size: 30px;
+}
+
+main h4 {
+  font-size: 20px;
+}
+/* Flexbox for the header to align elements horizontally */
+header {
+  display: flex;
+  align-items: center; /* Vertically align elements */
+}
+
+/* Make the dropdown text appear next to the title */
+.dropdown {
+  cursor: pointer;
+  color: blue;
+  font-size: 30px;
+  text-decoration: underline;
+  margin-left: 15px; /* Space between the h1 and the dropdown */
+}
+
+/* Style the options dropdown */
+.dropdown-options {
+  position:relative ;
+  background-color: white;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style individual items */
+.dropdown-item {
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Add hover effect */
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* Optional: Adjust positioning for dropdown, if needed */
+.information {
+  position: relative;
+  font-size: 40px;
+}
+
+.bold-blue {
+  font-weight: bolder;
+  color: blue;
+  font-size: 45px;
+}
+
+.bold-red {
+  font-weight: bolder;
+  color: #127751;
+  font-size: 45px;
+}
+
