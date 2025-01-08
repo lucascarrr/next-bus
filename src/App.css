@@ -18,8 +18,8 @@ header h1 {
 
 main {
   position: absolute;
-  top: 40%;
-  left: 55%;
+  top: 45%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 900px; /* Optional: set a maximum width */
@@ -87,6 +87,15 @@ header {
 .information {
   position: relative;
   font-size: 40px;
+}
+
+.reverseButton {
+  position: absolute;
+  top: -115px;
+  left: 455px;
+  z-index: 10; /* Makes sure it's on top of other elements */
+  margin: 10px; /* Adjust this value to place it where you want */
+  cursor: pointer; /* Optional: for better user interaction */
 }
 
 .bold-blue {
