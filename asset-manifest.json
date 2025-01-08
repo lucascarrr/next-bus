@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/next-bus/static/css/main.133c3032.css",
+    "main.js": "/next-bus/static/js/main.87cb338f.js",
+    "static/js/488.0ada03f1.chunk.js": "/next-bus/static/js/488.0ada03f1.chunk.js",
+    "index.html": "/next-bus/index.html",
+    "main.133c3032.css.map": "/next-bus/static/css/main.133c3032.css.map",
+    "main.87cb338f.js.map": "/next-bus/static/js/main.87cb338f.js.map",
+    "488.0ada03f1.chunk.js.map": "/next-bus/static/js/488.0ada03f1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.133c3032.css",
+    "static/js/main.87cb338f.js"
+  ]
+}
