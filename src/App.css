@@ -1,19 +1,25 @@
 .App {
   font-family: 'TX02Mono-Regular';
+  -webkit-text-size-adjust: 100%; /* Prevent auto text scaling on iOS */
 }
 
 @font-face {
   font-family: 'TX02Mono-Regular';
   src: url('https://intdev-global.s3.us-west-2.amazonaws.com/public/internet-dev/e049dfb6-9c5d-4ac4-97c2-eb6e95c61d09.woff2') format('woff2');
+  font-display: swap; /* Improve font loading performance */
 }
 
 header {
   text-align: left;
-  margin-top: 25px;
+  margin-top: clamp(15px, 4vw, 25px);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); /* iOS safe area */
+  display: flex;
+  align-items: center;
 }
 
 header h1 {
-  margin-left: 50px;
+  margin-left: clamp(10px, 5vw, 50px);
+  font-size: clamp(18px, 4vw, 30px);
 }
 
 main {
@@ -21,92 +27,127 @@ main {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 900px; /* Optional: set a maximum width */
-  box-sizing: border-box; /* Ensure padding and border do not affect width */
+  width: min(90%, 900px);
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
-main h1 {
-  font-size: 40px;
-}
+main h1 { font-size: clamp(24px, 5vw, 40px); }
+main h2 { font-size: clamp(24px, 5vw, 40px); }
+main h3 { font-size: clamp(20px, 4vw, 30px); }
+main h4 { font-size: clamp(16px, 3vw, 20px); }
 
-main h2 {
-  font-size: 40px;
-}
-
-main h3 {
-  font-size: 30px;
-}
-
-main h4 {
-  font-size: 20px;
-}
-/* Flexbox for the header to align elements horizontally */
-header {
-  display: flex;
-  align-items: center; /* Vertically align elements */
-}
-
-/* Make the dropdown text appear next to the title */
 .dropdown {
   cursor: pointer;
   color: blue;
-  font-size: 30px;
+  font-size: clamp(16px, 4vw, 30px);
   text-decoration: underline;
-  margin-left: 15px; /* Space between the h1 and the dropdown */
+  margin-left: clamp(8px, 2vw, 15px);
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
 }
 
-/* Style the options dropdown */
 .dropdown-options {
-  position:relative ;
+  position: absolute;
   background-color: white;
   border: 1px solid #ccc;
-  margin-left: 20px;
+  margin-left: clamp(10px, 2vw, 20px);
   padding: 10px;
   display: flex;
   flex-direction: column;
   margin-top: 5px;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Prevent overflow on small screens */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
-/* Style individual items */
 .dropdown-item {
-  padding: 5px;
+  padding: clamp(8px, 2vw, 10px);
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: clamp(14px, 3vw, 16px);
 }
 
-/* Add hover effect */
 .dropdown-item:hover {
   background-color: #f0f0f0;
 }
 
-
-/* Optional: Adjust positioning for dropdown, if needed */
 .information {
   position: relative;
-  font-size: 40px;
+  font-size: clamp(25px, 5vw, 40px);
 }
 
 .reverseButton {
   position: absolute;
-  top: -115px;
-  left: 455px;
-  z-index: 10; /* Makes sure it's on top of other elements */
-  margin: 10px; /* Adjust this value to place it where you want */
-  cursor: pointer; /* Optional: for better user interaction */
+  top: clamp(-60px, -15vw, -115px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  margin: 10px;
+  cursor: pointer;
+  padding: clamp(8px, 2vw, 12px);
+  font-size: clamp(14px, 3vw, 16px);
+  touch-action: manipulation; /* Improve touch handling */
 }
 
 .bold-blue {
   font-weight: bolder;
   color: blue;
-  font-size: 45px;
+  font-size: clamp(30px, 6vw, 45px);
 }
 
 .bold-red {
   font-weight: bolder;
   color: #127751;
-  font-size: 45px;
+  font-size: clamp(30px, 6vw, 45px);
 }
 
+/* iPhone-specific media queries */
+@supports (-webkit-touch-callout: none) {
+  /* iOS-specific adjustments */
+  main {
+    top: 50%;
+    transform: translate(-50%, -55%);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .dropdown-options {
+    max-height: 70vh;
+    border-radius: 8px;
+  }
+}
+
+/* Portrait iPhone SE and smaller */
+@media screen and (max-width: 375px) {
+  header h1 {
+    font-size: 16px;
+  }
+  
+  .dropdown {
+    font-size: 14px;
+  }
+  
+  main {
+    width: 95%;
+  }
+  
+  .bold-blue, .bold-red {
+    font-size: 22px;
+  }
+}
+
+/* Landscape mode adjustments */
+@media screen and (max-height: 450px) {
+  main {
+    position: relative;
+    top: 0;
+    transform: translateX(-50%);
+    margin-top: 60px;
+  }
+  
+  .reverseButton {
+    top: -40px;
+  }
+}
