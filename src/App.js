@@ -2,6 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
+  function timeToMinutes(time) {
+    const [hours, minutes] = time.split(":").map(Number);
+    return hours * 60 + minutes;
+  }
+
+  function calculateWaitingTime(closestTime) {
+    const closestMinutes = timeToMinutes(closestTime);
+    const currentMinutes = timeToMinutes(formattedTime);
+    let difference = closestMinutes - currentMinutes;
+
+    console.log(closestMinutes + " || " + formattedTime + " || " + difference);
+    if (difference < 0) {
+      difference += 24 * 60; // Add 24 hours in minutes
+    }
+
+    return difference;
+  }
+
   const routesData = {
     Hiddingh: {
       routeName: "Hiddingh",
@@ -9,22 +27,20 @@ function App() {
       destination: "UC_South",
     },
     Sandown: { routeName: "Sandown", src: "Sandown", destination: "UC_North" },
-    "City Bowl": {
-      routeName: "City Bowl",
-      src: "City Bowl",
-      destination: "Gardens",
-    },
-    Gardens: { routeName: "Gardens", src: "Gardens", destination: "UCT" },
   };
+
+  const currentTime = new Date();
   const [route, setRoute] = useState("Hiddingh"); // Default route
   const [src, setSrc] = useState(routesData[route].src); // Default source
-  const [destination, setDestination] = useState(routesData[route].destination); // Default dest
+  const [destination, setDestination] = useState(routesData[route].destination); // Default destination
 
   const [formattedTime, setFormattedTime] = useState("");
   const [nextBus, setNextBus] = useState("");
 
   const [showOptions, setShowOptions] = useState(false);
   const routeOptions = Object.keys(routesData);
+
+  const [waitingTime, setWaitingTime] = useState("");
 
   // Toggle the options list visibility
   const toggleOptions = () => setShowOptions(!showOptions);
@@ -35,6 +51,10 @@ function App() {
     setSrc(tempDest);
     setDestination(tempSrc);
     console.log(`Switching: source ${tempSrc} dest ${tempDest}`);
+
+    // Recalculate bus times after switching
+    setFormattedTime(getCurrentFormattedTime()); // Ensure time is updated
+    getNextTimes(route); // Fetch new bus times after switching places
   };
 
   // Handle route selection
@@ -58,10 +78,9 @@ function App() {
   }
 
   function findNextBus(schedule, src_arg, dst_arg) {
-    const currentTime = new Date();
     let currentHour = currentTime.getHours();
     let currentMinute = currentTime.getMinutes();
-    let currentTimeInMinutes = currentHour * 60 + currentMinute; // Convert current time to minutes
+    let currentTimeInMinutes = currentHour * 60 + currentMinute;
 
     let closestTime = null;
     let closestRow = null;
@@ -69,7 +88,6 @@ function App() {
     for (let row of schedule) {
       for (let stop in row) {
         if (stop === src_arg) {
-          // Check if the stop matches the source argument
           let timeParts = row[stop].split(":"); // Split the time string (e.g., "6:30")
           let busHour = parseInt(timeParts[0], 10);
           let busMinute = parseInt(timeParts[1], 10);
@@ -88,6 +106,7 @@ function App() {
 
     if (closestTime !== null) {
       setNextBus(closestRow[src_arg]);
+      setWaitingTime(calculateWaitingTime(closestRow[src_arg]));
       console.log(
         `Next bus from ${src_arg} to ${dst_arg} departs at ${closestRow[src_arg]}`
       );
@@ -98,44 +117,54 @@ function App() {
     }
   }
 
-  // Update time when the component mounts
-  useEffect(() => {
+  function getCurrentFormattedTime() {
     const currentTime = new Date();
     const hours = currentTime.getHours();
     const minutes = currentTime.getMinutes().toString().padStart(2, "0");
-    setFormattedTime(`${hours}:${minutes}`);
-
-    // Get the next bus on mount
-    getNextTimes(route);
-  }, [route]); // Re-run when the route changes
-
-  // Trigger getNextTimes when src or destination change
+    return `${hours}:${minutes}`;
+  }
   useEffect(() => {
     if (src && destination) {
       getNextTimes(route); // Fetch new bus times after src/destination change
     }
   }, [src, destination, route]);
 
+  // Update time when the component mounts
+  useEffect(() => {
+    const time = getCurrentFormattedTime();
+    setFormattedTime(time);
+    getNextTimes(route);
+  }, []);
+
+  // Re-run getNextTimes and calculate waiting time when formattedTime is updated
+  useEffect(() => {
+    if (formattedTime) {
+      getNextTimes(route); // Fetch new bus times after formattedTime is set
+    }
+  }, [formattedTime, route]); // Ensure it runs when formattedTime or route changes
+
   return (
     <div className="App">
       <header>
         <h1>Next Bus:</h1>
-        <span className="dropdown" onClick={toggleOptions}>
-          {route}
-        </span>
-        {showOptions && (
-          <div className="dropdown-options">
-            {routeOptions.map((option, index) => (
-              <div
-                key={index}
-                className="dropdown-item"
-                onClick={() => selectRoute(option)}
-              >
-                {option}
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="dropdown-container">
+          <span className="dropdown" onClick={toggleOptions}>
+            {route}
+          </span>
+          {showOptions && (
+            <div className="dropdown-options">
+              {routeOptions.map((option, index) => (
+                <div
+                  key={index}
+                  className="dropdown-item"
+                  onClick={() => selectRoute(option)}
+                >
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </header>
 
       <main>
@@ -149,9 +178,9 @@ function App() {
             <span className="bold-blue">{formattedTime}</span> the bus comes at{" "}
             <span className="bold-red">{nextBus}</span>
           </h2>
-          <h3>The next three busses are:</h3>
           <h4>
-            You'll be waiting <span id="waiting-time">XX</span> minutes
+            You'll be waiting <span id="waiting-time">{waitingTime}</span>{" "}
+            minutes
           </h4>
         </div>
       </main>
