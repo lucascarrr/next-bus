@@ -49,7 +49,7 @@ function App() {
   // Move getNextTimes outside of useEffect for accessibility
   function getNextTimes(route) {
     // Fetch the JSON file corresponding to the route
-    fetch("/assets/" + route + ".json")
+    fetch(process.env.PUBLIC_URL + "/assets/" + route + ".json")
       .then((response) => response.json())
       .then((data) => {
         // Get the correct schedule based on the day NA for now
