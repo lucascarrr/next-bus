@@ -46,70 +46,57 @@ function App() {
     const minutes = currentTime.getMinutes().toString().padStart(2, "0");
     setFormattedTime(`${hours}:${minutes}`);
 
-    function getNextTimes(route, src, destination, current_time, day) {
+    function getNextTimes(route) {
       // Fetch the JSON file corresponding to the route
       fetch("/assets/" + route + ".json")
         .then((response) => response.json())
         .then((data) => {
-          // Get the correct schedule based on the day
-          const schedule =
-            day === 6 || day == 7
-              ? data.schedule.weekends
-              : data.schedule.monday_to_friday;
-          console.log(schedule);
-          // Access the last time pair in "UC_South_to_Hiddingh_additional"
-          const additionalTimes =
-            data.schedule.monday_to_friday.UC_South_to_Hiddingh_additional;
-          const lastTimePair = additionalTimes[additionalTimes.length - 1];
-
-          console.log(lastTimePair);
-          // console.log(schedule."UC_South_to_Hiddingh".)
-          // Get the correct direction (source to destination or destination to source)
-          let direction = `${src}_to_${destination}`;
-          let busTimes = schedule[direction];
-
-          if (!busTimes) {
-            console.error("No bus times found for this route and direction.");
-            return;
-          }
-
-          // Find the next bus time based on the current time
-          const nextBus = findNextBus(busTimes, current_time);
-
-          // Display the next bus time
-          console.log("Next bus time: ", nextBus);
-        })
-        .catch((error) => console.error("Error fetching data:", error));
+          // Get the correct schedule based on the day NA for now
+          //TODO determine if weekday
+          findNextBus(data.schedule.weekday, src, destination, currentTime);
+        });
     }
-
-    function findNextBus(busTimes, current_time) {
+    function findNextBus(schedule, src_arg, dst_arg, current_time) {
       let currentHour = current_time.getHours();
       let currentMinute = current_time.getMinutes();
-      let currentTimeInMinutes = currentHour * 60 + currentMinute;
+      let currentTimeInMinutes = currentHour * 60 + currentMinute; // Convert current time to minutes
 
-      // Loop through the bus times and find the first one that is after the current time
-      for (let bus of busTimes) {
-        let busTime = bus[src]; // Get the time for the source
+      let closestTime = null;
+      let closestRow = null;
 
-        let [busHour, busMinute] = busTime.split(":").map(Number);
-        let busTimeInMinutes = busHour * 60 + busMinute;
+      for (let row of schedule) {
+        for (let stop in row) {
+          if (stop === src_arg) {
+            // Check if the stop matches the source argument
+            let timeParts = row[stop].split(":"); // Split the time string (e.g., "6:30")
+            let busHour = parseInt(timeParts[0], 10);
+            let busMinute = parseInt(timeParts[1], 10);
+            let busTimeInMinutes = busHour * 60 + busMinute;
 
-        if (busTimeInMinutes > currentTimeInMinutes) {
-          return busTime;
+            // Check if this time is greater than or equal to current time and closer
+            if (busTimeInMinutes >= currentTimeInMinutes) {
+              if (closestTime === null || busTimeInMinutes < closestTime) {
+                closestTime = busTimeInMinutes;
+                closestRow = row;
+              }
+            }
+          }
         }
       }
 
-      return "No more buses today";
+      if (closestTime !== null) {
+        setNextBus(closestRow[src_arg]);
+        console.log(
+          `Next bus from ${src_arg} to ${dst_arg} departs at ${closestRow[src_arg]}`
+        );
+        return closestRow;
+      } else {
+        console.log(`No more buses from ${src_arg} to ${dst_arg} today.`);
+        return null;
+      }
     }
 
-    getNextTimes(
-      "Hiddingh",
-      "Hiddingh",
-      "uc_south",
-      "10h00",
-      currentTime.getDay()
-    );
-    setNextBus(``);
+    getNextTimes(route);
   }, []);
 
   return (

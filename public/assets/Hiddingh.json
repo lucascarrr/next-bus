@@ -1,35 +1,23 @@
 {
-    "route": "10: Hiddingh via Tugwell – South Stop",
-    "schedule": {
-      "monday_to_friday": {
-        "UC_South_to_Hiddingh": [
-          {"UC_South": "6:30", "Tugwell": "6:40", "Hiddingh": "7:00"},
-          {"UC_South": "7:20", "Tugwell": "7:30", "Hiddingh": "7:50"},
-          {"UC_South": "8:10", "Tugwell": "8:20", "Hiddingh": "8:40"},
-          {"UC_South": "9:00", "Tugwell": "9:10", "Hiddingh": "9:30"},
-          {"UC_South": "13:45", "Tugwell": "13:55"}
-        ],
-        "Hiddingh_to_UC_South": [
-          {"Hiddingh": "14:15", "Tugwell": "14:35", "UC_South": "14:45"},
-          {"Hiddingh": "15:05", "Tugwell": "15:30", "UC_South": "15:45"},
-          {"Hiddingh": "16:05", "Tugwell": "16:30", "UC_South": "16:45"},
-          {"Hiddingh": "17:05", "Tugwell": "17:30", "UC_South": "17:40"},
-          {"Hiddingh": "18:00"}
-        ],
-        "UC_South_to_Hiddingh_additional": [
-          {"UC_South": "7:20", "Tugwell": "7:25", "Hiddingh": "7:45"},
-          {"UC_South": "8:05", "Tugwell": "8:15", "Hiddingh": "8:40"},
-          {"UC_South": "9:05", "Tugwell": "9:15", "Hiddingh": "9:40"},
-          {"UC_South": "13:15", "Tugwell": "13:25", "Hiddingh": "13:45"},
-          {"UC_South": "14:05", "Tugwell": "14:10", "Hiddingh": "14:30"}
-        ]
-      },
-      "notes": [
-        "No access without UCT student & staff card or visitor's pass",
-        "Break in service: No shuttles to and from Hiddingh outside of these times",
-        "Shuttles might not operate on time during peak periods and due to heavy traffic on route"
-      ],
-      "weekends": "No shuttles available"
-    }
+  "schedule": {
+    "weekday": [
+      { "UC_South": "6:30", "Tugwell": "6:40", "Hiddingh": "7:00" },
+      { "UC_South": "7:20", "Tugwell": "7:30", "Hiddingh": "7:50" },
+      { "UC_South": "8:10", "Tugwell": "8:20", "Hiddingh": "8:40" },
+      { "UC_South": "9:00", "Tugwell": "9:10", "Hiddingh": "9:30" },
+      { "UC_South": "13:45", "Tugwell": "13:55" },
+      { "Hiddingh": "14:15", "Tugwell": "14:35", "UC_South": "14:45" },
+      { "Hiddingh": "15:05", "Tugwell": "15:30", "UC_South": "15:45" },
+      { "Hiddingh": "16:05", "Tugwell": "16:30", "UC_South": "16:45" },
+      { "Hiddingh": "17:05", "Tugwell": "17:30", "UC_South": "17:40" },
+      { "Hiddingh": "18:00" }
+    ],
+    "weekend": [
+      { "UC_South": "7:20", "Tugwell": "7:25", "Hiddingh": "7:45" },
+      { "UC_South": "8:05", "Tugwell": "8:15", "Hiddingh": "8:40" },
+      { "UC_South": "9:05", "Tugwell": "9:15", "Hiddingh": "9:40" },
+      { "UC_South": "13:15", "Tugwell": "13:25", "Hiddingh": "13:45" },
+      { "UC_South": "14:05", "Tugwell": "14:10", "Hiddingh": "14:30" }
+    ]
   }
-  
+}
