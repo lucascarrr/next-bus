@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/next-bus/static/css/main.7a701b3b.chunk.css",
-    "main.js": "/next-bus/static/js/main.0c2b627d.chunk.js",
-    "main.js.map": "/next-bus/static/js/main.0c2b627d.chunk.js.map",
+    "main.js": "/next-bus/static/js/main.1bfcf8d0.chunk.js",
+    "main.js.map": "/next-bus/static/js/main.1bfcf8d0.chunk.js.map",
     "runtime-main.js": "/next-bus/static/js/runtime-main.0a120e8a.js",
     "runtime-main.js.map": "/next-bus/static/js/runtime-main.0a120e8a.js.map",
     "static/js/2.333fef68.chunk.js": "/next-bus/static/js/2.333fef68.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.dde89952.chunk.js": "/next-bus/static/js/3.dde89952.chunk.js",
     "static/js/3.dde89952.chunk.js.map": "/next-bus/static/js/3.dde89952.chunk.js.map",
     "index.html": "/next-bus/index.html",
-    "precache-manifest.87c3aa609e24bd37efa5f143598f647b.js": "/next-bus/precache-manifest.87c3aa609e24bd37efa5f143598f647b.js",
+    "precache-manifest.d2419a74bd469ba1cddde40702d05ed5.js": "/next-bus/precache-manifest.d2419a74bd469ba1cddde40702d05ed5.js",
     "service-worker.js": "/next-bus/service-worker.js",
     "static/css/main.7a701b3b.chunk.css.map": "/next-bus/static/css/main.7a701b3b.chunk.css.map",
     "static/js/2.333fef68.chunk.js.LICENSE.txt": "/next-bus/static/js/2.333fef68.chunk.js.LICENSE.txt"
@@ -19,6 +19,6 @@
     "static/js/runtime-main.0a120e8a.js",
     "static/js/2.333fef68.chunk.js",
     "static/css/main.7a701b3b.chunk.css",
-    "static/js/main.0c2b627d.chunk.js"
+    "static/js/main.1bfcf8d0.chunk.js"
   ]
 }
