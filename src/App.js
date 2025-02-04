@@ -41,7 +41,6 @@ function App() {
   const routeOptions = Object.keys(routesData);
 
   const [waitingTime, setWaitingTime] = useState("");
-  const [isFetching, setIsFetching] = useState(false); // Prevent duplicate fetches
 
   // Toggle the options list visibility
   const toggleOptions = () => setShowOptions(!showOptions);
@@ -55,6 +54,7 @@ function App() {
 
     // Recalculate bus times after switching
     setFormattedTime(getCurrentFormattedTime()); // Ensure time is updated
+    getNextTimes(route); // Fetch new bus times after switching places
   };
 
   // Handle route selection
@@ -66,18 +66,14 @@ function App() {
     setDestination(selectedRouteData.destination);
   };
 
-  // Fetch bus times based on route, source, and destination
+  // Move getNextTimes outside of useEffect for accessibility
   function getNextTimes(route) {
-    if (isFetching) return; // Prevent fetching if already in progress
-
-    setIsFetching(true);
     // Fetch the JSON file corresponding to the route
     fetch(process.env.PUBLIC_URL + "/assets/" + route + ".json")
       .then((response) => response.json())
       .then((data) => {
         // Get the correct schedule based on the day NA for now
         findNextBus(data.schedule.weekday, src, destination);
-        setIsFetching(false); // Reset fetching status
       });
   }
 
@@ -127,18 +123,25 @@ function App() {
     const minutes = currentTime.getMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
   }
+  useEffect(() => {
+    if (src && destination) {
+      getNextTimes(route); // Fetch new bus times after src/destination change
+    }
+  }, [src, destination, route]);
 
+  // Update time when the component mounts
   useEffect(() => {
     const time = getCurrentFormattedTime();
     setFormattedTime(time);
+    getNextTimes(route);
   }, []);
 
-  // Consolidated useEffect for route, src, destination changes
+  // Re-run getNextTimes and calculate waiting time when formattedTime is updated
   useEffect(() => {
-    if (src && destination && route) {
-      getNextTimes(route); // Fetch new bus times when route, src, or destination changes
+    if (formattedTime) {
+      getNextTimes(route); // Fetch new bus times after formattedTime is set
     }
-  }, [route, src, destination]); // Trigger this effect only when these dependencies change
+  }, [formattedTime, route]); // Ensure it runs when formattedTime or route changes
 
   return (
     <div className="App">
