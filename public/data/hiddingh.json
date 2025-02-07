@@ -1,0 +1,44 @@
+{
+  "weekday": [
+    { "UC_South": "6:30", "Tugwell": "6:40", "Hiddingh": "7:00" },
+    { "UC_South": "7:20", "Tugwell": "7:30", "Hiddingh": "7:50" },
+    { "UC_South": "8:10", "Tugwell": "8:20", "Hiddingh": "8:40" },
+    { "UC_South": "9:00", "Tugwell": "9:10", "Hiddingh": "9:30" },
+    { "UC_South": "9:50", "Tugwell": "10:00", "Hiddingh": "10:20" },
+    { "UC_South": "10:40", "Tugwell": "10:50", "Hiddingh": "11:10" },
+    { "UC_South": "11:30", "Tugwell": "11:40", "Hiddingh": "12:00" },
+    { "UC_South": "12:30", "Tugwell": "12:40", "Hiddingh": "13:00" },
+    { "UC_South": "13:30", "Tugwell": "13:45" },
+    { "Hiddingh": "14:15", "Tugwell": "14:35", "UC_South": "14:45" },
+    { "Hiddingh": "15:05", "Tugwell": "15:30", "UC_South": "15:45" },
+    { "Hiddingh": "16:05", "Tugwell": "16:30", "UC_South": "16:45" },
+    { "Hiddingh": "17:05", "Tugwell": "17:20", "UC_South": "17:30" },
+    { "Hiddingh": "17:50", "Tugwell": "18:20" },
+    { "UC_South": "18:35", "Tugwell": "18:45", "Hiddingh": "19:10" },
+    { "UC_South": "19:45", "Tugwell": "19:55", "Hiddingh": "20:20" }
+  ],
+  "saturday": [
+    { "UC_South": "7:20", "Tugwell": "7:25", "Hiddingh": "7:45" },
+    { "UC_South": "8:05", "Tugwell": "8:20", "Hiddingh": "8:50" },
+    { "UC_South": "9:15", "Tugwell": "9:30", "Hiddingh": "10:00" },
+    { "UC_South": "10:25", "Tugwell": "10:40", "Hiddingh": "11:00" },
+    { "UC_South": "11:30", "Tugwell": "11:45", "Hiddingh": "12:15" },
+    { "UC_South": "12:45", "Tugwell": "13:00", "Hiddingh": "13:30" },
+    { "UC_South": "14:00", "Tugwell": "14:10", "Hiddingh": "14:30" }
+  ],
+  "sunday": [
+    { "Hiddingh": "14:15", "Tugwell": "14:35", "UC_South": "14:45" },
+    { "Hiddingh": "15:05", "Tugwell": "15:30", "UC_South": "15:45" },
+    { "Hiddingh": "16:05", "Tugwell": "16:30", "UC_South": "16:45" },
+    { "Hiddingh": "17:05", "Tugwell": "17:20", "UC_South": "17:30" },
+    { "Hiddingh": "17:50", "Tugwell": "18:20" },
+    { "UC_South": "8:05", "Tugwell": "8:20", "Hiddingh": "8:50" },
+    { "UC_South": "9:15", "Tugwell": "9:30", "Hiddingh": "10:00" },
+    { "UC_South": "10:25", "Tugwell": "10:40", "Hiddingh": "11:00" },
+    { "UC_South": "11:30", "Tugwell": "11:45", "Hiddingh": "12:15" },
+    { "UC_South": "12:45", "Tugwell": "13:00", "Hiddingh": "13:30" },
+    { "UC_South": "14:00", "Tugwell": "14:10", "Hiddingh": "14:30" },
+    { "UC_South": "18:35", "Tugwell": "18:45", "Hiddingh": "19:10" },
+    { "UC_South": "19:45", "Tugwell": "19:55", "Hiddingh": "20:20" }
+  ]
+}

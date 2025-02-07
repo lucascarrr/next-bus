@@ -1,0 +1,44 @@
+
+<div class="main">
+
+  <h1> The next bus from Hiddingh to UC_South comes at X </h1>
+  <h2> You'll be waiting X minutes </h2> 
+  <h3> After that, there are buses at A <br> B <br> C </h3>
+
+<!-- Button to trigger fetching bus info -->
+<button id="fetch-bus-info" class="btn">Get Next Bus</button>
+
+<!-- Section to display the bus info -->
+<div id="bus-info" style="margin-top: 20px;"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('fetch-bus-info');
+    const busInfoDiv = document.getElementById('bus-info');
+
+    button.addEventListener('click', () => {
+      // Replace 'weekday' and 'Hiddingh' with dynamic values if needed
+      fetch('/next_bus/weekday/Hiddingh/UC_South')
+        .then(response => response.json())
+        .then(data => {
+          if (data.Message) {
+            busInfoDiv.innerHTML = `<p>${data.Message}</p>`;
+          } else {
+            busInfoDiv.innerHTML = `
+              <p><strong>From:</strong> ${data.SRC}</p>
+              <p><strong>To:</strong> ${data.DST}</p>
+              <p><strong>Current Time:</strong> ${data.CURR_TIME}</p>
+              <p><strong>Arrival Time:</strong> ${data.ARR_TIME}</p>
+              <p><strong>Waiting Time:</strong> ${data.WAIT_TIME}</p>
+            `;
+          }
+        })
+        .catch(error => {
+          busInfoDiv.innerHTML = `<p>Error fetching bus info.</p>`;
+          console.error('Error:', error);
+        });
+    });
+  });
+</script>
+
+</main> 

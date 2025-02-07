@@ -1,0 +1,57 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+.App {
+  font-family: 'TX02Mono-Regular';
+  -webkit-text-size-adjust: 100%; 
+}
+
+@font-face {
+  font-family: 'TX02Mono-Regular';
+  src: url('https://intdev-global.s3.us-west-2.amazonaws.com/public/internet-dev/e049dfb6-9c5d-4ac4-97c2-eb6e95c61d09.woff2') format('woff2');
+  font-display: swap; 
+}
+
+:root {
+  background-color: #012D9C;
+  color: #ECF5FF;
+  height: 100vh; /* Make sure the root element covers the full viewport height */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  padding-top: 15%;
+}
+
+.main {
+  font-family: TX02Mono-Regular;
+  width: 60vw;               /* Set a fixed width */
+  background-color: #ECF5FF;
+  color: black;
+  padding: 20px;            /* Optional: Add some padding for spacing inside */
+  border-radius: 10px;      /* Optional: Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+}
+
+.main h1 {
+  font-size: 42pt;
+}
+.main .btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-family: TX02Mono-Regular;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main .btn:hover {
+  background-color: #0056b3;
+}
